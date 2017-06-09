@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>canvas绘制画布</title>
+
+<style type="text/css">
+	#can{
+		border: 1px dotted #f00;
+	}
+</style>
+
+<script type="text/javascript">
+function foo(id) {
+	return document.getElementById(id);
+}
+
+var num1,num2,intX,intY;
+function pageOnload() {
+	var canv = foo("can");
+	var cxt = canv.getContext('2d');
+	drawFace(cxt);
+	num1 = 1;
+	num2 = 21;
+	setInterval(moveFace, 1000);
+}
+//调用自定义函数绘制笑脸
+function drawFace(cxt) {
+	drawCirc(cxt,"#666",30,80,30,2,true);
+	drawCirc(cxt,"#f00",20,70,5,5,true);
+	drawCirc(cxt,"#0f0",40,70,5,5,true);
+	drawCirc(cxt,"#00f",30,80,25,25,false);
+}
+//根据参数绘制各类图形
+function drawCirc(cxt,strColor,intX,intY,intR,intR,blnFill) {
+	cxt.beginPath();
+	cxt.arc(intX,intY,intR,0,Math.PI * intR,blnFill);
+	if (blnFill) {
+		cxt.fillStyle = strColor;
+		cxt.fill();
+	} else {
+		cxt.lineWidth = 1;
+		cxt.strokeStyle = strColor;
+		cxt.stroke();
+	}
+	cxt.closePath();
+}
+//实现往返移动笑脸的功能
+function moveFace() {
+	var canv = foo("can");
+	var cxt = canv.getContext('2d');
+	cxt.clearRect(0,0,280,190);
+	if (num1<20) {
+		num1 +=1;
+		intX = num1;
+	} else {
+	if (num2>0) {
+		num2 -=1;
+		intX = -num2;
+		}
+	}
+	cxt.translate(intX,0);
+	drawFace(cxt);
+}
+</script>
+</head>
+<body onload="pageOnload()">
+	<canvas id="can" height="280px" width="190px"></canvas>
+</body>
+</html>
