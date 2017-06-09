@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>自动填写表单</title>
+	<style type="text/css">
+		.hasCountdown {
+			font-family:Arial,Verdana,Lucida,Helvetica,simsun,sans-serif;
+			font-size:10px;
+		}
+		.countdown_row {
+			clear: both;
+			width: 100%;
+			padding: 0px 2px;
+			text-align: left;
+		}
+		.countdown_show1 .countdown_section {
+			width: 98%;
+		}
+		.countdown_show2 .countdown_section {
+			width: 48%;
+		}
+		.countdown_show3 .countdown_section {
+			width: 32.5%;
+		}
+		.countdown_show4 .countdown_section {
+			width: 24.5%;
+		}
+		.countdown_show5 .countdown_section {
+			width: 19.5%;
+		}
+		.countdown_show6 .countdown_section {
+			width: 16.25%;
+		}
+		.countdown_show7 .countdown_section {
+			width: 14%;
+		}
+		.countdown_section {
+			display: block;
+			float: left;
+			font-size: 75%;
+			text-align: center;
+			font-family:"宋体",Arial,Verdana,Lucida,Helvetica,simsun,sans-serif;
+		   font-size:12px;
+		}
+		.countdown_amount {
+			font-size: 200%;
+		}
+	</style>
+</head>
+<body onload="countDown()">
+<div id="clockDown" class="hasCountdown">
+    <span class="countdown_row countdown_show4">
+        <span class="countdown_section"><span class="countdown_amount"></span><br>天</span>
+        <span class="countdown_section"><span class="countdown_amount"></span><br>时</span>
+        <span class="countdown_section"><span class="countdown_amount"></span><br>分</span>
+        <span class="countdown_section"><span class="countdown_amount"></span><br>秒</span>
+    </span>
+</div>
+<input type="submit" name="btnStart" value="开始报名" id="btnStart" style="height:39px;width:103px;" disabled="disabled">
+<p id="show"></p>
+<!-- <script type="text/javascript" src="jquery-3.2.0.min.js"></script> -->
+<script type="text/javascript">
+    /*$("#btnStart").attr("disabled", "disabled");
+        if (false) {
+            $("#btnStart").removeAttr("disabled");
+        }
+
+        var currentMinute = 167887.7290546;
+        var shortly = new Date();
+        var myTimeOut = false;
+        $(document).ready(function () {
+            shortly.setSeconds(shortly.getSeconds() + currentMinute);
+            
+            $('#clockDown').countdown({ until: shortly,
+                onExpiry: liftOff, onTick: watchCountdown
+            });
+        });
+
+        function liftOff() 
+        {
+            
+            $("#btnStart").removeAttr("disabled");
+            
+        }
+        function watchCountdown(periods) {
+            if (periods[4]==0 && periods[5]==3 && periods[6]==0)
+            {
+                //alert('还有3分钟！点击确认按钮刷新请重新精确计时！');
+                self.location.reload(); 
+            }
+        }*/
+
+    //纯js实现
+    function countDown(year, month, day, hour, minute, second) {
+    	var leftTime = (new Date(year, month-1, day, hour, minute, second)) - (new Date());//计算剩余时间
+    	var days = parseInt(leftTime / 1000 / 60 / 60 / 24, 10);//计算剩余的天数
+    	var hours = parseInt(leftTime / 1000/ 60 / 60 %24, 10);//计算剩余小时数
+    	var minutes = parseInt(leftTime / 1000 /60 % 60, 10) + 1;//计算剩余分钟数
+    	var seconds = parseInt(leftTime / 1000 %60, 10);//计算剩余秒数
+    	//设置定时器
+    	setInterval("countDown(2017,6,10,9,0,0)", 1000);//倒计时2017年6月10日9点
+    	document.getElementById('show').innerHTML = days + "天" + hours + "小时" + minutes + "分钟" +　seconds + "秒";
+    }
+</script>
+</body>
+</html>
+
